@@ -1,0 +1,143 @@
+<html>
+  <head>
+    <style>
+
+body {
+    margin: 0;
+}
+#container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.title {
+    text-align: center;
+    font-family: "Comic Sans MS";
+    padding-bottom: 50px;
+}
+
+.bingo {
+    width: 45%;
+    align-self: center;
+}
+
+.bingo-table {
+    width: 100%;
+    height: 600px;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.bingo-table td {
+    border: 2px solid black;
+    width: 20%;
+    height: 20%;
+    text-align: center;
+
+    padding: 5px;
+
+    font-family: "Helvetica Neue";
+}
+
+.vr {
+    width: 1px;
+    height: 100vh;
+    background: black;
+}
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <div class="bingo">
+        <div class="title">
+          <h2> Bingo! </h2>
+          <h3> 5 i rad (diagonal räknas) (och kolumn) = vinst</h3>
+        </div>
+        <table class="bingo-table">
+        </table>
+      </div>
+      <div class="vr"> </div>
+      <div class="bingo">
+        <div class="title">
+          <h2> Bingo! </h2>
+          <h3> 5 i rad (diagonal räknas) (och kolumn) = vinst</h3>
+        </div>
+        <table class="bingo-table">
+        </table>
+      </div>
+  </body>
+
+  <script>
+    bingo = [
+        "Nathan sover (fri ruta)",
+        "Går på lunch",
+        "Sätter på film",
+        "Tekniska problem",
+        "Klagar på skolor/friskolor/systemet",
+        "Klagar på Schoolsoft",
+        "Kritiserar Trump",
+        "Pratar om kina",
+        "Artikel från The Economist",
+        "Name-droppar någon bara Nathan har hört om",
+        "Gustav T avbryter",
+        "Pratar om högerextremism",
+        "Oscar pratar om kommunism",
+        "Skriver något oläsbart på tavlan",
+        "Smörar för mattespets",
+        "Trivial fråga på krysset",
+        "Omatchande inledning och fråga på krysset",
+        "Någon kommer sent",
+        "Pratar medan vi läser artiklar",
+        "Pratar om politiska vildar",
+        "William säger prosit",
+        "Kommer tillbaka för sent efter “lunch”",
+        "Sen till lektionen",
+        "Diskussion om provfrågornas tvetydighet",
+        "Glömmer vad för läxa vid har",
+        "Säger fel sidnummer",
+        "Glömmer vem som har nyheter",
+        "Den som har nyhet är inte förberedd",
+        "Nathan får inte poäng på krysset",
+        "Glömmer säga om svar är 1/X/2",
+        "Hektor får poäng på krysset (automatisk bingo för alla)",
+        "Frågar om källor på nyheterna",
+        "Ingen fråga upprepas på krysset",
+        "Anders mejlar länk man inte kommer in på",
+        "Använder skum hälsningsfras (howdy, etc.)",
+        "Pratar om klimatkris",
+        "Leopold klagar på att ha fått 8/10 på krysset",
+        "Anders har med sig kaffe",
+        "Någon bakar till lektionen",
+        "Dåligt kopierad artikel",
+    ];
+
+    tables = document.getElementsByClassName("bingo-table");
+    for (i = 0; i < tables.length; i++) {
+        table = tables[i];
+
+        not_used = [];
+        for (a = 0; a < bingo.length; a++) {
+            not_used.push(bingo[a]);
+        }
+
+        for (y = 0; y < 5; y++) {
+            tr = document.createElement("tr");
+            for (x = 0; x < 5; x++) {
+                td = document.createElement("td");
+
+                if (y == 2 && x == 2) {
+                    idx = 0;
+                } else {
+                    idx = 1 + 0 | ((not_used.length - 1) * Math.random());
+                }
+                td.innerHTML = not_used[idx];
+                not_used.splice(idx, 1);
+
+                tr.appendChild(td);
+            }
+            table.appendChild(tr);
+        }
+    }
+  </script>
+</html>
